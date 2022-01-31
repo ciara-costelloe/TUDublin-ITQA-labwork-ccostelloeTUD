@@ -57,7 +57,7 @@
 3. Created a script, ran it until it exceeded the resources of the namespace and was terminated.
 4. Took a docker image from a repository and ran it.
 5. Loaded same docker image into my own container images repo and ran it.
-6. Turned on vunerability image scanner and reloaded images.  More on this below.
+6. Turned on vunerability image scanner and reloaded image.  More on the results below.
 7. Then I ran a script inside and outside a namespace to count the CPU.  This was severely hampered by the fact I didn't know the fullstop was important in docker and I have some sort of full stop blindness.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -91,13 +91,13 @@ On the host: CPU count 4
 
 Specific request to look at CVE-2019-19814 in detail.  This was the critical vulnerability in the banking app.
 Vulnerability can write to out of bounds memory locations. 
-Doc test on bugzilla says: An out of bounds (OOB) memory access flaw was found in the Linux kernel's F2FS file system. A local attacker could use this vulnerability to crash the system or leak kernel internal information.
-Therefore this image should never be released to a production environment.  It would be especially important if that production environment was an actual banking app due to the impact a crash could have.
+Doc test on redhat bugzilla says: An out of bounds (OOB) memory access flaw was found in the Linux kernel's F2FS file system. A local attacker could use this vulnerability to crash the system or leak kernel internal information.
+Therefore this image should never be released to a production environment.  It would be particularly important if that production environment was an actual banking app due to the impact a crash  and/or hack could have.
 <br />
-Should it be released to a test environment?  Ideally not as memory and cpu seems to still be shared with docker image from the machine and not hardware isolated.  
-The test environment should be isolated from the outside world so they should not be in a position to be hacked (used best judgement on whether that is the case or not based on company).
+Should it be released to a test environment?  Ideally not as memory and cpu seems to still be shared with the docker image from the machine and not isolated from the hardware.  
+The test environment should be isolated from the outside world so it should not be in a position to be easily hacked ideally (use best judgement on whether that is the case or not based on company enviornment and security).
 <br />
-Actions: Get the developer to update the OS in the image and make the relevant adjustments to the package as a matter of urgency.  The purpose of the code doesn't seem like there would be much need for it to be tied to an OS.  It's very high level. 
+Actions: Get the developer to update the OS in the image and make the relevant adjustments to the package as a matter of urgency.  Based on the quick look we got of the functionality, it doesn't seem like there would be much need for the code to be tied to an OS as it's very high level. Coupled with the fact that a container is supposed provide a clearly scoped and limited amount of functionality, hopefully that means it will be easily updated.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
