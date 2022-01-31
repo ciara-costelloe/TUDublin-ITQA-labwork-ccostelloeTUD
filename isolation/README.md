@@ -81,6 +81,8 @@ Outcomes of the cpu count:
 Inside the container: CPU count 4
 On the host: CPU count 4
 
+Spent 28 cent of credit on Google Cloud.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONCLUSIONS -->
